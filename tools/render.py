@@ -2,9 +2,9 @@
 """render.py - AI代班中 成片合成器
 用法：python3 render.py <集數資料夾>
 資料夾內需要：
-  episode.json  {"title":..., "scenes":[{"body": "<html>", "narration": "旁白全文"}...], "thumbnail": {"big":"縮圖大字","small":"小字"}}
+  episode.json  {"title":..., "scenes":[{"body": "<html>", "narration": "旁白全文", "chapter": "可選：章節名"}...], "thumbnail": {"big":"縮圖大字","small":"小字"}}
   audio/01.mp3, audio/02.mp3 ...  每個場景一段配音（Runway 產生後下載）
-輸出：final.mp4（1920x1080）、captions.srt、thumbnail.jpg、render.log
+輸出：final.mp4（1920x1080）、captions.srt、chapters.txt、thumbnail.jpg、render.log
 每個場景依句號切成字幕，字幕時間按字數比例分配在該段配音裡。
 """
 import html, json, os, re, subprocess, sys
@@ -36,11 +36,12 @@ def ts(s):
 def main(ep):
     data = json.load(open(os.path.join(ep, "episode.json"), encoding="utf-8"))
     work = os.path.join(ep, "_work"); os.makedirs(work, exist_ok=True)
-    scenes = data["scenes"]; segs = []; srt = []; t0 = 0.0; k = 0
+    scenes = data["scenes"]; segs = []; srt = []; t0 = 0.0; k = 0; chapters = []
     for i, sc in enumerate(scenes, 1):
         audio = os.path.join(ep, "audio", f"{i:02d}.mp3")
         if not os.path.exists(audio): sys.exit(f"缺少配音 {audio}")
         ad = dur(audio); pad = 0.4; total = ad + pad
+        if sc.get("chapter"): chapters.append((t0, sc["chapter"]))
         caps = sentences(sc["narration"]); weights = [max(len(c), 4) for c in caps]; W = sum(weights)
         lst = []; acc = 0.0
         for j, c in enumerate(caps):
@@ -60,6 +61,10 @@ def main(ep):
         for s in segs: f.write(f"file '{os.path.abspath(s)}'\n")
     run(["ffmpeg","-y","-f","concat","-safe","0","-i",os.path.join(work,"all.txt"),"-c","copy","-movflags","+faststart",os.path.join(ep,"final.mp4")])
     open(os.path.join(ep, "captions.srt"), "w", encoding="utf-8").write("\n".join(srt))
+    def mmss(t): t = int(t); return f"{t//60}:{t%60:02d}"
+    if chapters:
+        if chapters[0][0] > 0: chapters.insert(0, (0.0, "開場"))
+        open(os.path.join(ep, "chapters.txt"), "w", encoding="utf-8").write("\n".join(f"{mmss(t)} {c}" for t, c in chapters) + "\n")
     th = data.get("thumbnail", {})
     if th:
         hp = os.path.join(work, "thumb.html")
