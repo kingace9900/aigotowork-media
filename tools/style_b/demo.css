@@ -1,0 +1,29 @@
+#demo .win{position:absolute;left:480px;top:120px;width:1380px;height:640px;background:#fff;border-radius:22px;box-shadow:0 20px 60px rgba(31,41,55,.14);overflow:hidden;border:1px solid #e5e7eb}
+#demo .bar{height:52px;background:#f3f4f6;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid #e5e7eb}
+#demo .bar i{width:14px;height:14px;border-radius:50%;display:block}
+#demo .bar span{margin-left:16px;font-size:20px;color:#6b7280}
+#demo .app{display:flex;height:588px}
+#demo .sheet{flex:1;padding:24px}
+#demo .kpi{font-size:26px;margin-bottom:16px;display:flex;align-items:center;gap:14px;height:52px}
+#demo .kpi b{font-size:40px;color:#16a34a}
+#demo table{border-collapse:collapse;width:100%;font-size:22px}
+#demo th{background:#f9fafb;color:#6b7280;font-weight:600;text-align:left;padding:12px;border:1px solid #e5e7eb;white-space:nowrap}
+#demo td{padding:12px;border:1px solid #e5e7eb;transition:none;white-space:nowrap}
+#demo .rn{color:#9ca3af;width:40px;background:#f9fafb}
+#demo tr.r td{background:#fde8e8}
+#demo .new{outline:3px solid #f59e0b;outline-offset:-3px}
+#demo .hide{visibility:hidden}
+#demo .dd{padding:3px 10px;border-radius:8px;font-size:19px}
+#demo .g{background:#dcfce7;color:#166534}
+#demo .b{background:#dbeafe;color:#1e40af}
+#demo .o{background:#ffedd5;color:#9a3412}
+#demo .chat{width:340px;background:#fafaf9;border-left:1px solid #e5e7eb;padding:20px;display:flex;flex-direction:column;gap:14px;font-size:19px}
+#demo .msg{padding:12px 14px;border-radius:14px;line-height:1.5}
+#demo .me{background:#e0e7ff;align-self:flex-end}
+#demo .ai{background:#fff;border:1px solid #e5e7eb}
+#demo .input{margin-top:auto;border:2px solid #d1d5db;border-radius:12px;padding:12px;background:#fff;min-height:110px;line-height:1.5}
+#demo .input.focus{border-color:#6366f1}
+#demo .ph{color:#9ca3af}
+#demo .cur{color:#6366f1}
+#demo .mouse{position:absolute;width:30px;height:30px;z-index:9}
+#demo .ring{position:absolute;width:54px;height:54px;border-radius:50%;border:4px solid #f97316;background:rgba(249,115,22,.2);z-index:8}
