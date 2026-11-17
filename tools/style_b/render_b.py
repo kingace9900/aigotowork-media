@@ -137,12 +137,12 @@ def main(ep):
             fo.write(f"file '{runs[-1][0]}'\n")
     (x0, y0), (x1, y1) = sprites[False], sprites[True]
     out = os.path.join(ep, "final.mp4")
-    fc = (f"[1:v]fps={FPS},format=rgba[s];[2:v]fps={FPS},format=rgba[h];[0:v][s]overlay={x0}:{y0}:eof_action=pass[a];"
-          f"[a][h]overlay={x1}:{y1}:eof_action=pass,format=yuv420p[v]")
+    fc = (f"[1:v]fps={FPS},format=rgba[s];[2:v]fps={FPS},format=rgba[h];[0:v]scale=in_range=full:out_range=full,format=gbrp[b];[b][s]overlay={x0}:{y0}:eof_action=pass:format=gbrp[a];"
+          f"[a][h]overlay={x1}:{y1}:eof_action=pass:format=gbrp,scale=out_color_matrix=bt709:out_range=tv,format=yuv420p[v]")
     subprocess.run(["ffmpeg","-v","error","-y","-framerate",str(FPS),"-i",os.path.join(work,"fr","%05d.jpg"),
                     "-f","concat","-safe","0","-i",os.path.join(work,"av0.txt"),"-f","concat","-safe","0","-i",os.path.join(work,"av1.txt"),
                     "-i",full,"-filter_complex",fc,"-map","[v]","-map","3:a","-t",f"{T:.3f}",
-                    "-c:v","libx264","-preset","medium","-crf","21","-c:a","aac","-b:a","160k","-ar","44100","-movflags","+faststart",out],check=True)
+                    "-c:v","libx264","-preset","medium","-crf","21","-colorspace","bt709","-color_range","tv","-c:a","aac","-b:a","160k","-ar","44100","-movflags","+faststart",out],check=True)
     open(os.path.join(ep,"captions.srt"),"w",encoding="utf-8").write("\n".join(srt))
     def mmss(t): t = int(t); return f"{t//60}:{t%60:02d}"
     if chapters:
