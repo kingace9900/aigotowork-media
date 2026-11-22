@@ -1,0 +1,27 @@
+*{margin:0;box-sizing:border-box}
+body{width:1920px;height:1080px;font-family:'Noto Sans CJK TC',sans-serif;background:linear-gradient(135deg,#f8fafc,#e2e8f0);color:#0f172a;overflow:hidden;position:relative}
+.wrap{position:absolute;inset:90px 120px 230px}
+body.side .wrap{left:900px;right:90px}
+body.pip .wrap{right:420px}
+body.side .hostbg{position:absolute;left:0;top:0;width:860px;height:1080px;background:#e5e7eb}
+body.pip .hostbg{position:absolute;right:60px;top:110px;width:330px;height:437px;border-radius:22px;background:#cbd5e1;box-shadow:0 10px 30px rgba(15,23,42,.25)}
+.brand{position:absolute;right:50px;top:36px;font-size:30px;color:#64748b;font-weight:700}
+.prog{position:absolute;left:0;top:0;right:0;height:8px;background:#e2e8f0}.prog i{display:block;height:100%;background:#f59e0b}
+.cap{position:absolute;left:0;right:0;bottom:50px;text-align:center}
+body.side .cap{left:860px}
+.cap span{background:rgba(15,23,42,.85);color:#fff;font-size:48px;font-weight:700;padding:12px 30px;border-radius:12px;line-height:1.5}
+.tag{display:inline-block;background:#f59e0b;color:#111;font-weight:700;font-size:34px;padding:8px 22px;border-radius:10px}
+h1{font-size:88px;font-weight:900;line-height:1.2;margin-top:36px}
+h2{font-size:58px;font-weight:800;margin-bottom:30px}
+p,li{font-size:40px;line-height:1.6}ul,ol{padding-left:56px}li{margin-bottom:14px}
+.hl{background:#fcd34d;color:#111;padding:0 8px;border-radius:6px}
+.muted{color:#64748b}
+table{border-collapse:collapse;font-size:30px;width:100%;background:#fff}td,th{border:2px solid #cbd5e1;padding:12px 16px;text-align:left}th{background:#e2e8f0}
+.red td{background:#fee2e2}.yellow td{background:#fef3c7}.green td{background:#dcfce7}
+.cols{display:flex;gap:50px}.cols>div{flex:1}.lbl{font-size:38px;font-weight:800;margin-bottom:16px}
+.arrow{font-size:110px;align-self:center;color:#f59e0b}
+.prompt{background:#fff;border:3px solid #f59e0b;border-radius:18px;padding:32px 44px;font-size:38px;line-height:1.6;white-space:pre-wrap;box-shadow:0 6px 20px rgba(15,23,42,.08)}
+.card{background:#fff;border:2px solid #e2e8f0;border-radius:18px;padding:28px 34px;box-shadow:0 6px 20px rgba(15,23,42,.06)}
+.steps{display:flex;gap:26px}.steps .card{flex:1;font-size:34px}.steps .n{font-size:58px;font-weight:900;color:#d97706}
+.ok{color:#16a34a}.ng{color:#dc2626}
+body.side table{font-size:26px}body.side .prompt{font-size:34px}
