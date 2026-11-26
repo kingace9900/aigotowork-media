@@ -26,6 +26,8 @@ def sentences(t):
         while len(p) > 26:
             cut = max(p.rfind("，", 0, 26), p.rfind("、", 0, 26))
             cut = cut + 1 if cut > 6 else 26
+            while 6 < cut < len(p) and p[cut-1].isascii() and p[cut-1].isalnum() and p[cut].isascii() and p[cut].isalnum():
+                cut -= 1  # 不要把英文字切成兩半
             out.append(p[:cut]); p = p[cut:].strip()
         if p: out.append(p)
     return out
